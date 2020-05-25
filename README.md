@@ -1,42 +1,35 @@
-<include a CircleCI status badge, here>
+#CircleCI Badge and Link:
+[![CircleCI](https://circleci.com/gh/iancrowl/project5.svg?style=svg)] (https://app.circleci.com/pipelines/github/iancrowl/project5/5/workflows/31d851d8-08ba-469a-bf69-0997e8baf940)
 
-## Project Overview
+#Github Repo
+https://github.com/iancrowl/project5.git
 
-In this project, you will apply the skills you have acquired in this course to operationalize a Machine Learning Microservice API. 
+#Summary:
+I started by crating an Cloud9 environment. I installed the extra software needed to build the project. I installed haldolint locally to test, i ran minkube locally as well b
+by using the minikube tutorial and running it within the cloud9 environment with a special command to run with a single cpu. I then modified the Dockerfile and Makefile as needed to be able to 
+build out my environment.  Next, I manually tester each command in the Dockerfile or Kubernetes commands to make sure my environments would build. Following this, I run the files ran_docker.sh and
+run_kubernetes.sh respectively.  Once each environment was running, I would run make_prediction.sh in a new window to copy the output to the respective output files.  To wrap it all up, I pushed the bits
+to the respective repos, (DockerHub, GitHub).  Finally, I created the .circleci and config.yml file and completed a passing CicleCi build.
 
-You are given a pre-trained, `sklearn` model that has been trained to predict housing prices in Boston according to several features, such as average rooms in a home and data about highway access, teacher-to-pupil ratios, and so on. You can read more about the data, which was initially taken from Kaggle, on [the data source site](https://www.kaggle.com/c/boston-housing). This project tests your ability to operationalize a Python flask app—in a provided file, `app.py`—that serves out predictions (inference) about housing prices through API calls. This project could be extended to any pre-trained machine learning model, such as those for image recognition and data labeling.
+#Intrsutions/Commands used:
+I ran a few different commands to confiure the virtualenv
+-python3 -m venv ~/.devops
+-source ~/.devops/bin/activate
+Added programs from the requirements.txt via
+-make install
+Ran the various lint commands to validate my files
+-make lint
+to run minikube in single cpu more, i used
+-minikube start --extra-config=kubeadm.ignore-preflight-errors=NumCPU --force --cpus 1
+I ran the run_docker.sh file to build out my docker containter, followed by show_prediction.sh in a new terminal
+I pushed my docker image to my Dockerhub repo
+-docker push iancrowl/udacityproject
+I ran the run_kubernetes.sh file to build out my minikube pod, followed by show_prediction.sh in a new terminal window
+I pushed my local files to my github repo 
+connected to circleci and ran a test until passed
 
-### Project Tasks
+#files
+This readme file with the passing badge, github repo and descitions
+in the output_txt_files folder, there will be the docker_out.txt and the kubernetes_out.txt. 
+in thers files will show the output in the second termincal window at the top, and the bottom section will show the output from the original terminal window where the app is running localy.
 
-Your project goal is to operationalize this working, machine learning microservice using [kubernetes](https://kubernetes.io/), which is an open-source system for automating the management of containerized applications. In this project you will:
-* Test your project code using linting
-* Complete a Dockerfile to containerize this application
-* Deploy your containerized application using Docker and make a prediction
-* Improve the log statements in the source code for this application
-* Configure Kubernetes and create a Kubernetes cluster
-* Deploy a container using Kubernetes and make a prediction
-* Upload a complete Github repo with CircleCI to indicate that your code has been tested
-
-You can find a detailed [project rubric, here](https://review.udacity.com/#!/rubrics/2576/view).
-
-**The final implementation of the project will showcase your abilities to operationalize production microservices.**
-
----
-
-## Setup the Environment
-
-* Create a virtualenv and activate it
-* Run `make install` to install the necessary dependencies
-
-### Running `app.py`
-
-1. Standalone:  `python app.py`
-2. Run in Docker:  `./run_docker.sh`
-3. Run in Kubernetes:  `./run_kubernetes.sh`
-
-### Kubernetes Steps
-
-* Setup and Configure Docker locally
-* Setup and Configure Kubernetes locally
-* Create Flask app in Container
-* Run via kubectl
